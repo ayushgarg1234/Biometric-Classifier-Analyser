@@ -125,7 +125,7 @@ int main()
 
 	//cout << min_diff << " " << min_count << " " << min_index << "\n";
 	float theshold = (min + (float(min_index) + float(min_count)/2)/1000000);
-	cout << theshold << " " << array[285664].diff << "\n";
+	//cout << theshold << " " << array[285664].diff << "\n";
 
 	cin >> n;
 }
