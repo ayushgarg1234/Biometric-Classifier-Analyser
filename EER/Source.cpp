@@ -94,15 +94,15 @@ int main()
 		array[i].I_cum = array[i].I_cum / total_I;
 	}
 
-	ofstream FAvsFR;
-	FAvsFR.open("FAR_FRR.txt");
+	ofstream FARvsFRR;
+	FARvsFRR.open("FAR_FRR.txt");
 
 	for (int i = 0; i <= no_of_buckets; i++)
 	{
-		FAvsFR << array[i].G_cum << " " << array[i].I_cum << "\n";
+		FARvsFRR << array[i].G_cum << " " << array[i].I_cum << "\n";
 	}
 
-	FAvsFR.close();
+	FARvsFRR.close();
 
 	for (int i = 0; i <= no_of_buckets; i++)
 	{
