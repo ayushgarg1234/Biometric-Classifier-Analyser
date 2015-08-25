@@ -13,9 +13,9 @@ public:
 
 class histogram {
 public:
-	int G_cum = 0;
-	int I_cum = 0;
-	int diff;
+	float G_cum = 0;
+	float I_cum = 0;
+	float diff;
 };
 
 int main()
@@ -83,11 +83,19 @@ int main()
 	for (int i = 1; i <= no_of_buckets ; i++)
 	{
 		array[i].I_cum = array[i - 1].I_cum + array[i].I_cum;
-		array[no_of_buckets - i - 1].G_cum = array[no_of_buckets - i].G_cum + array[no_of_buckets - i - 1].G_cum;
+		array[no_of_buckets - i].G_cum = array[no_of_buckets - i].G_cum + array[no_of_buckets - i + 1].G_cum;
+	}
+	
+	int total_G = array[0].G_cum, total_I = array[no_of_buckets].I_cum;
+
+	for (int i = 0; i <= no_of_buckets; i++)
+	{
+		array[i].G_cum = array[i].G_cum / total_G;
+		array[i].I_cum = array[i].I_cum / total_I;
 	}
 
 	ofstream FAvsFR;
-	FAvsFR.open("FA_FR.txt");
+	FAvsFR.open("FAR_FRR.txt");
 
 	for (int i = 0; i <= no_of_buckets; i++)
 	{
@@ -103,7 +111,7 @@ int main()
 		//test << array[i].diff << "\n";
 	}
 
-	int min_diff = array[0].diff;
+	float min_diff = array[0].diff;
 	int min_index = 0, min_count = 0;
 
 
@@ -125,7 +133,7 @@ int main()
 
 	//cout << min_diff << " " << min_count << " " << min_index << "\n";
 	float theshold = (min + (float(min_index) + float(min_count)/2)/1000000);
-	//cout << theshold << " " << array[285664].diff << "\n";
+	cout << theshold << "\n";
 
 	cin >> n;
 }
