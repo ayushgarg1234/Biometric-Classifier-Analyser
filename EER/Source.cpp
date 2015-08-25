@@ -95,15 +95,15 @@ int main()
 		array[i].I_cum = array[i - 1].I_cum + array[i].I_cum;
 		array[no_of_buckets - i].G_cum = array[no_of_buckets - i+1].G_cum + array[no_of_buckets - i].G_cum;
 	}
-/*    cout << array[0].G_cum << " " << array[no_of_buckets].I_cum<<"\n";
+    //cout << array[0].G_cum << " " << array[no_of_buckets].I_cum<<"\n";
 
     stringstream temp1,temp2;
     temp1<<(array[0].G_cum);
-    temp2<<(array[no_of_buckets].I_cum);*/
-    char command[60]="sh graph_change.sh ";/*
+    temp2<<(array[no_of_buckets].I_cum);
+    char command[60]="sh graph_change.sh ";
     strcat(command,temp1.str().c_str());
     strcat(command," ");
-    strcat(command,temp2.str().c_str());*/
+    strcat(command,temp2.str().c_str());
     system(command);
     strcpy(command,"sh graph_generate.sh");
     system(command);
