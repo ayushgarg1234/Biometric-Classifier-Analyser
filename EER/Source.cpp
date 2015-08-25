@@ -1,7 +1,10 @@
 #include <iostream>
 #include <fstream>
-#include <string.h>
-#include <vector>
+#include <cmath>
+#include<cstdlib>
+#include<sstream>
+#include<cstring>
+//#include <vector>
 
 using namespace std;
 
@@ -13,10 +16,17 @@ public:
 
 class histogram {
 public:
-	float G_cum = 0;
-	float I_cum = 0;
+	float G_cum;
+	float I_cum;
 	float diff;
+    histogram();
 };
+
+histogram::histogram()
+{
+    G_cum = 0;
+    I_cum = 0;
+}
 
 int main()
 {
@@ -25,14 +35,14 @@ int main()
 	a = new EER_Data[n];
 	ifstream myfile;
 	float max = 0, min = 1;
-	myfile.open("L4_1000.txt");
+	myfile.open("EER_input.txt");
 	for (int i = 0; i < n; i++)
 	{
-		int temp1, temp2, temp3, temp4;
+		/*int temp1, temp2, temp3, temp4;
 		myfile >> temp1;
 		myfile >> temp2;
 		myfile >> temp3;
-		myfile >> temp4;
+		myfile >> temp4;*/
 		myfile >> a[i].G_I;
 		myfile >> a[i].score;
 		if (a[i].score < min)
@@ -62,12 +72,12 @@ int main()
 	ofstream score;
 	score.open("score.txt");
 
-	for (int i = 0; i <= 1000000; i++)
+	for (int i = 0; i <= no_of_buckets; i++)
 	{
-		if ((float(i) / 1000000 < min) || (float(i) / 1000000 > max))
+/*		if ((float(i) / 1000000 < min) || (float(i) / 1000000 > max))
 			score << float(i) / 1000000 << " " << "0" << " " << "0" << "\n";
 		else
-			score << float(i) / 1000000 << " " << array[i - int(min*1000000)].G_cum << " " << array[i - int(min * 1000000)].I_cum << "\n";
+*/		score << (float(i) / 1000000+min) << " " << array[i].G_cum << " " << array[i].I_cum << "\n";
 		
 	}
 	
@@ -79,13 +89,24 @@ int main()
 	}
 
 	*/
-	//cout << array[no_of_buckets].I_cum;
+	//cout << array[0].G_cum << " " << array[no_of_buckets].I_cum;
 	for (int i = 1; i <= no_of_buckets ; i++)
 	{
 		array[i].I_cum = array[i - 1].I_cum + array[i].I_cum;
-		array[no_of_buckets - i].G_cum = array[no_of_buckets - i].G_cum + array[no_of_buckets - i + 1].G_cum;
+		array[no_of_buckets - i].G_cum = array[no_of_buckets - i+1].G_cum + array[no_of_buckets - i].G_cum;
 	}
-	
+/*    cout << array[0].G_cum << " " << array[no_of_buckets].I_cum<<"\n";
+
+    stringstream temp1,temp2;
+    temp1<<(array[0].G_cum);
+    temp2<<(array[no_of_buckets].I_cum);*/
+    char command[60]="sh graph_change.sh ";/*
+    strcat(command,temp1.str().c_str());
+    strcat(command," ");
+    strcat(command,temp2.str().c_str());*/
+    system(command);
+    strcpy(command,"sh graph_generate.sh");
+    system(command);
 	int total_G = array[0].G_cum, total_I = array[no_of_buckets].I_cum;
 
 	for (int i = 0; i <= no_of_buckets; i++)
@@ -132,8 +153,8 @@ int main()
 	}
 
 	//cout << min_diff << " " << min_count << " " << min_index << "\n";
-	float theshold = (min + (float(min_index) + float(min_count)/2)/1000000);
-	cout << theshold << "\n";
+	float threshold = (min + (float(min_index) + float(min_count)/2)/1000000);
+	cout << threshold << "\n";
 
-	cin >> n;
+	//cin >> n;
 }
