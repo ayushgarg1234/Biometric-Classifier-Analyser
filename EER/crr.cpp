@@ -15,7 +15,7 @@ int main()
     int test_id,test_image,g_or_i;
     float min_score=1,max_score=0,temp_score;
     ifstream myFile;
-    myFile.open("L4_1000.txt");
+    myFile.open("L4.txt");
     ofstream CRR;
     CRR.open("CRR.dat");
     
@@ -53,7 +53,7 @@ int main()
         }
         else
         {
-            CRR << test.id << " " << test.image << " " << min_match.id << " " << min_match.image << " "  << min_score << " "  << max_match.id << " " << max_match.image << " "  << max_score << " " << min_score/max_score;// << " " << (test.id==min_match.id);
+            CRR << test.id << " " << test.image << " " << min_match.id << " " << min_match.image << " "  << min_score << " "  << max_match.id << " " << max_match.image << " "  << max_score << " " << min_score/max_score << " " << (test.id==min_match.id) <<endl;
 
             test.id=test_id;test.image=test_image;
             myFile >> min_match.id >> min_match.image >> g_or_i >> min_score;
@@ -63,7 +63,7 @@ int main()
         }
     }
 
-    CRR << test.id << " " << test.image << " " << min_match.id << " " << min_match.image << " "  << min_score << " "  << max_match.id << " " << max_match.image << " "  << max_score << " " << min_score/max_score << " " << (test.id==min_match.id);
+    CRR << test.id << " " << test.image << " " << min_match.id << " " << min_match.image << " "  << min_score << " "  << max_match.id << " " << max_match.image << " "  << max_score << " " << min_score/max_score << " " << (test.id==min_match.id) <<endl;
     
     myFile.close();
     CRR.close();

@@ -14,7 +14,7 @@ set ylabel "Frequency (%)"
 set grid layerdefault lt 0 linewidth 1.000,  lt 0 linewidth 1.000
 set datafile missing '-'
 set xrange [ 0.000000 : 1.010000 ]
-set yrange [ 0.000: 25.000 ]
+set yrange [ 0.000: 0.050000 ]
 plot inpfile1 t 'Genuine' w impulses,\
 inpfile2 t 'Imposter' w impulses
 EOF
