@@ -115,6 +115,7 @@ int main()
 	system(command);
 	strcpy(command, "sh graph_generate.sh");
 	system(command);
+
 	int total_G = array[0].G_cum, total_I = array[no_of_buckets].I_cum;
 
 	for (int i = 0; i <= no_of_buckets; i++)
