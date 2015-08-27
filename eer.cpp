@@ -98,7 +98,7 @@ int main(int argc,char * argv[])
 
 	for (int i = 0; i <= no_of_buckets; i++)
 	{
-		FARvsFRR << array[i].G_cum << " " << array[i].I_cum << "\n";
+		FARvsFRR << array[i].I_cum << " " << array[i].G_cum << "\n";
 	}
 
 	FARvsFRR.close();
