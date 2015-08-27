@@ -4,8 +4,16 @@
 #include<cstdlib>
 #include<sstream>
 #include<cstring>
+//#include <vector>
 
 using namespace std;
+
+/*
+class EER_Data {
+public:
+	bool G_I;
+	float score;
+};*/
 
 class histogram {
 public:
@@ -21,26 +29,22 @@ histogram::histogram()
 	I_cum = 0;
 }
 
-int main()
+int main(int argc,char * argv[])
 {
-	
 	ifstream myfile;
-	
-	myfile.open("EER_input.txt");
-    
+	myfile.open(argv[1]);
+    //ifstream fin("EER_input.txt", ios::in);
     int no_of_buckets = 1000000;
     
     histogram *array;
 	array = new histogram[no_of_buckets + 1];
 
+    int temp1,temp2,temp3,temp4,G_I;
+    float score;
+
     while(!myfile.eof())
     {
-        int G_I;
-        float score;
-    	/*myfile >> temp1;
-	    myfile >> temp2;
-    	myfile >> temp3;
-        myfile >> temp4;*/
+      	myfile >> temp1 >> temp2 >> temp3 >> temp4;
     	myfile >> G_I;
     	myfile >> score;
         int index = score * 1000000;
@@ -65,21 +69,21 @@ int main()
 			test_G_Hist << (float(i) / 1000000) << " " << array[i].G_cum << "\n";
 		if (array[i].I_cum != 0)
 			test_I_Hist << (float(i) / 1000000) << " " << array[i].I_cum << "\n";
-
 	}
 
 	test_G_Hist.close();
 	test_I_Hist.close();
-
+	
 	for (int i = 1; i <= no_of_buckets; i++)
 	{
 		array[i].I_cum = array[i - 1].I_cum + array[i].I_cum;
 		array[no_of_buckets - i].G_cum = array[no_of_buckets - i + 1].G_cum + array[no_of_buckets - i].G_cum;
 	}
 	//cout << array[0].G_cum << " " << array[no_of_buckets].I_cum<<"\n";
- 	stringstream temp1, temp2;
-	temp1 << (array[0].G_cum);
-	temp2 << (array[no_of_buckets].I_cum);
+ 	
+    stringstream temp_1, temp_2;
+	temp_1 << (array[0].G_cum);
+	temp_2 << (array[no_of_buckets].I_cum);
    
    	int total_G = array[0].G_cum, total_I = array[no_of_buckets].I_cum;
 
@@ -100,9 +104,9 @@ int main()
 	FARvsFRR.close();
 
 	char command[60] = "sh graph_change.sh ";
-	strcat(command, temp1.str().c_str());
+	strcat(command, temp_1.str().c_str());
 	strcat(command, " ");
-	strcat(command, temp2.str().c_str());
+	strcat(command, temp_2.str().c_str());
 	system(command);
 	strcpy(command, "sh graph_generate.sh");
 	system(command);    
@@ -139,5 +143,6 @@ int main()
 	float threshold = ((float(min_index) + float(min_count) / 2) / 1000000);
 	cout << threshold << "\n";
 
+	//cin >> n;
 	return 0;
 }

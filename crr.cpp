@@ -8,14 +8,14 @@ public:
     int image;
 };
 
-int main()
+int main(int argc,char* argv[])
 {
     pos test,max_match,min_match,temp;
     test.id=1;test.image=1;
     int test_id,test_image,g_or_i;
     float min_score=1,max_score=0,temp_score;
     ifstream myFile;
-    myFile.open("L4.txt");
+    myFile.open(argv[1]);
     ofstream CRR;
     CRR.open("CRR.dat");
     
