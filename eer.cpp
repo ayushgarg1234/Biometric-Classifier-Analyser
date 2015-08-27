@@ -45,8 +45,7 @@ int main(int argc,char * argv[])
     while(!myfile.eof())
     {
       	myfile >> temp1 >> temp2 >> temp3 >> temp4;
-    	myfile >> G_I;
-    	myfile >> score;
+    	myfile >> G_I >> score;
         int index = score * 1000000;
 	    if (G_I)
 		    array[index].G_cum++;
@@ -86,19 +85,19 @@ int main(int argc,char * argv[])
 	temp_2 << (array[no_of_buckets].I_cum);
    
    	int total_G = array[0].G_cum, total_I = array[no_of_buckets].I_cum;
-
+    
 	for (int i = 0; i <= no_of_buckets; i++)
 	{
 		array[i].G_cum = array[i].G_cum / total_G;
 		array[i].I_cum = array[i].I_cum / total_I;
 	}
-
+    
 	ofstream FARvsFRR;
-	FARvsFRR.open("FAR_FRR.txt");
+	FARvsFRR.open("FAR_FRR.dat");
 
 	for (int i = 0; i <= no_of_buckets; i++)
 	{
-		FARvsFRR << array[i].I_cum << " " << array[i].G_cum << "\n";
+		FARvsFRR << i << " " << array[i].G_cum*total_G << " " << array[i].G_cum << "\t" << i << " " << array[i].I_cum*total_I << " " << array[i].I_cum << "\n";
 	}
 
 	FARvsFRR.close();
@@ -141,8 +140,32 @@ int main(int argc,char * argv[])
 
 	//cout << min_diff << " " << min_count << " " << min_index << "\n";
 	float threshold = ((float(min_index) + float(min_count) / 2) / 1000000);
+    ofstream eer;
+    eer.open("eer.txt");
+    eer << "  (" << array[min_index].G_cum << ")  " << threshold << " with Difference = " <<array[min_index].diff; 
 	cout << threshold << "\n";
-
-	//cin >> n;
+    eer.close();
+    ofstream fa,fr;
+    fa.open("test.FA");
+    fa << "Imposters Passed (FA)\n";
+    fr.open("test.FR");
+    fr << "Genuine Passed (FR)\n";
+    myfile.open(argv[1]);
+    //float score1;
+    while(!myfile.eof())
+    {
+   	    myfile >> temp1 >> temp2 >> temp3 >> temp4;
+       	myfile >> G_I >> score;
+	    if(score<=threshold && !G_I)
+        {
+            fa << temp1 <<  " " << temp2 << " " << temp3 <<  " " << temp4 <<  " " << 0 <<  " " << score << endl;
+        }
+        else if(score>threshold && G_I)
+        {
+            fr << temp1 <<  " " << temp2 <<  " " << temp3 <<  " " << temp4 <<  " " << 1 <<  " " << score << endl;            
+        }
+    }
+    fa.close();fr.close();
+    //cin >> n;
 	return 0;
 }

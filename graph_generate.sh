@@ -11,6 +11,7 @@ set output "score.png"
 set title "Genuine vs Imposter Score Frequency Histogram" 
 set xlabel "Score (%)"
 set ylabel "Frequency (%)"
+#set autoscale
 set grid layerdefault lt 0 linewidth 1.000,  lt 0 linewidth 1.000
 set datafile missing '-'
 set xrange [ 0.000000 : 1.010000 ]
