@@ -142,9 +142,10 @@ int main(int argc,char * argv[])
 	float threshold = ((float(min_index) + float(min_count) / 2) / 1000000);
     ofstream eer;
     eer.open("eer.txt");
-    eer << "  (" << array[min_index].G_cum << ")  " << threshold << " with Difference = " <<array[min_index].diff; 
+    //eer << "  (" << array[min_index].G_cum << ")  " << threshold << " with Difference = " <<array[min_index].diff; 
+    eer << array[min_index].G_cum << " " << threshold << " " << "0 "; 
+
 	cout << threshold << "\n";
-    eer.close();
     ofstream fa,fr;
     fa.open("test.FA");
     fa << "Imposters Passed (FA)\n";
@@ -152,6 +153,7 @@ int main(int argc,char * argv[])
     fr << "Genuine Passed (FR)\n";
     myfile.open(argv[1]);
     //float score1;
+    int fa_cnt=0,fr_cnt=0;
     while(!myfile.eof())
     {
    	    myfile >> temp1 >> temp2 >> temp3 >> temp4;
@@ -159,13 +161,17 @@ int main(int argc,char * argv[])
 	    if(score<=threshold && !G_I)
         {
             fa << temp1 <<  " " << temp2 << " " << temp3 <<  " " << temp4 <<  " " << 0 <<  " " << score << endl;
+            fa_cnt++;
         }
         else if(score>threshold && G_I)
         {
-            fr << temp1 <<  " " << temp2 <<  " " << temp3 <<  " " << temp4 <<  " " << 1 <<  " " << score << endl;            
+            fr << temp1 <<  " " << temp2 <<  " " << temp3 <<  " " << temp4 <<  " " << 1 <<  " " << score << endl;
+            fr_cnt++;
         }
     }
     fa.close();fr.close();
+    eer << fr_cnt << " " << total_G << " " << fa_cnt << " " << total_I << " " << array[min_index].G_cum<< " " << array[min_index].I_cum;
+    eer.close();
     //cin >> n;
 	return 0;
 }
