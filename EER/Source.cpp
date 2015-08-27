@@ -4,16 +4,8 @@
 #include<cstdlib>
 #include<sstream>
 #include<cstring>
-//#include <vector>
 
 using namespace std;
-
-/*
-class EER_Data {
-public:
-	bool G_I;
-	float score;
-};*/
 
 class histogram {
 public:
@@ -31,11 +23,11 @@ histogram::histogram()
 
 int main()
 {
-	//int n = 1000;
+	
 	ifstream myfile;
-	//float max = 0, min = 1;
+	
 	myfile.open("EER_input.txt");
-    //ifstream fin("EER_input.txt", ios::in);
+    
     int no_of_buckets = 1000000;
     
     histogram *array;
@@ -69,9 +61,6 @@ int main()
 	myfile.close();
 	for (int i = 0; i <= no_of_buckets; i++)
 	{
-		/*		if ((float(i) / 1000000 < min) || (float(i) / 1000000 > max))
-					score << float(i) / 1000000 << " " << "0" << " " << "0" << "\n";
-				else*/
 		if (array[i].G_cum != 0)
 			test_G_Hist << (float(i) / 1000000) << " " << array[i].G_cum << "\n";
 		if (array[i].I_cum != 0)
@@ -81,15 +70,6 @@ int main()
 
 	test_G_Hist.close();
 	test_I_Hist.close();
-	//test << max << " " << min << " " << n << "\n";
-    /*	for (int i = 0; i < no_of_buckets; i++)
-	{
-		test << array[i].G_cum << " " << array[i].I_cum << "\n";
-	}
-
-    */
-	//cout << array[0].G_cum << " " << array[no_of_buckets].I_cum;
- 
 
 	for (int i = 1; i <= no_of_buckets; i++)
 	{
@@ -132,9 +112,7 @@ int main()
 	
     for (int i = 0; i <= no_of_buckets; i++)
 	{
-		//test << array[i].G_cum << " " << array[i].I_cum << " ";
 		array[i].diff = abs(array[i].G_cum - array[i].I_cum);
-		//test << array[i].diff << "\n";
 	}
 
 	float min_diff = array[0].diff;
@@ -161,6 +139,5 @@ int main()
 	float threshold = ((float(min_index) + float(min_count) / 2) / 1000000);
 	cout << threshold << "\n";
 
-	//cin >> n;
 	return 0;
 }
