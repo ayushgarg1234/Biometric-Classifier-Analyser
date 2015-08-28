@@ -12,5 +12,6 @@ else
         echo "Data File is $file"
         ./eer $file
         ./crr $file
+	sh stat.sh
     fi
 fi

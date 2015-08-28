@@ -9,4 +9,5 @@ cat test_I_Hist.dat|awk -f stat.awk >> stat.txt
 awk 'BEGIN {print "**************************************************************************************************************************************" 
 print "Performance Parameters" 
 print "==========================="}' >> stat.txt
-cat CRR.dat|awk -f crr.awk >> stat.txt
+awk -f crr.awk eer.txt CRR.dat >> stat.txt
+rm eer.txt
