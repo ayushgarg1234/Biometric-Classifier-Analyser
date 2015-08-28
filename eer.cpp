@@ -165,12 +165,12 @@ int main(int argc,char * argv[])
        	myfile >> G_I >> score;
 	    if(score<=threshold && !G_I)
         {
-            fa << temp1 <<  " " << temp2 << " " << temp3 <<  " " << temp4 <<  " " << 0 <<  " " << score << endl;
+            fa << temp1 <<  " " << temp2 << " " << temp3 <<  " " << temp4 <<  " " << 0 <<  " " << score << "\n";
             fa_cnt++;
         }
         else if(score>threshold && G_I)
         {
-            fr << temp1 <<  " " << temp2 <<  " " << temp3 <<  " " << temp4 <<  " " << 1 <<  " " << score << endl;
+            fr << temp1 <<  " " << temp2 <<  " " << temp3 <<  " " << temp4 <<  " " << 1 <<  " " << score << "\n";
             fr_cnt++;
         }
     }

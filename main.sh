@@ -13,6 +13,6 @@ else
         ./eer $file
         ./crr $file
 	sh stat.sh
-	emacs stat.txt
+	#emacs stat.txt
     fi
 fi

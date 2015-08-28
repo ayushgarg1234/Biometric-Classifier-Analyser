@@ -53,7 +53,7 @@ int main(int argc,char* argv[])
         }
         else
         {
-            CRR << test.id << " " << test.image << " [(" << min_match.id << "," << min_match.image << ")"  << min_score << "] [("  << max_match.id << "," << max_match.image << ")"  << max_score << "] " << min_score/max_score << " " << (test.id==min_match.id) <<endl;
+            CRR << test.id << " " << test.image << " [(" << min_match.id << "," << min_match.image << ")"  << min_score << "] [("  << max_match.id << "," << max_match.image << ")"  << max_score << "] " << min_score/max_score << " " << (test.id==min_match.id) <<"\n";
 
             test.id=test_id;test.image=test_image;
             myFile >> min_match.id >> min_match.image >> g_or_i >> min_score;
@@ -63,7 +63,7 @@ int main(int argc,char* argv[])
         }
     }
 
-    CRR << test.id << " " << test.image << " [(" << min_match.id << "," << min_match.image << ")"  << min_score << "] [("  << max_match.id << "," << max_match.image << ")"  << max_score << "] " << min_score/max_score << " " << (test.id==min_match.id) <<endl;
+    CRR << test.id << " " << test.image << " [(" << min_match.id << "," << min_match.image << ")"  << min_score << "] [("  << max_match.id << "," << max_match.image << ")"  << max_score << "] " << min_score/max_score << " " << (test.id==min_match.id) <<"\n";
     
     myFile.close();
     CRR.close();

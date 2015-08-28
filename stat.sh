@@ -1,13 +1,14 @@
 awk 'BEGIN {print "**************************************************************************************************************************************" 
 print "Genuine" 
-print "==========================="}' > stat.txt
-cat test_G_Hist.dat|awk -f stat.awk >> stat.txt
+print "==========================="}' > stat.sts
+awk -f stat.awk test_G_Hist.dat > temp.txt
+cat temp.txt >> stat.sts
 awk 'BEGIN {print "**************************************************************************************************************************************" 
 print "Imposter" 
-print "==========================="}' >> stat.txt
-cat test_I_Hist.dat|awk -f stat.awk >> stat.txt
-awk 'BEGIN {print "**************************************************************************************************************************************" 
-print "Performance Parameters" 
-print "==========================="}' >> stat.txt
-awk -f crr.awk eer.txt CRR.dat >> stat.txt
-rm eer.txt
+print "==========================="}' >> stat.sts
+awk -f stat.awk test_I_Hist.dat > temp1.txt
+cat temp1.txt >> stat.sts
+cat temp1.txt >> temp.txt
+awk -f crr.awk eer.txt temp.txt CRR.dat >> stat.sts
+rm temp.txt temp1.txt eer.txt
+
