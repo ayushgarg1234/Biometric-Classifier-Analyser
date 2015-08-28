@@ -82,7 +82,7 @@ int main(int argc,char * argv[])
 		array[i].I_cum = array[i - 1].I_cum + array[i].I_cum;
 		array[no_of_buckets - i].G_cum = array[no_of_buckets - i + 1].G_cum + array[no_of_buckets - i].G_cum;
 	}
-	cout << array[0].G_cum << " " << array[no_of_buckets].I_cum<<"\n";
+	//cout << array[0].G_cum << " " << array[no_of_buckets].I_cum<<"\n";
  	
     stringstream temp_1, temp_2;
 	temp_1 << (array[0].G_cum);
@@ -102,7 +102,7 @@ int main(int argc,char * argv[])
 	for (int i = 0; i <= no_of_buckets; i++)
 	{
 	  //FARvsFRR << i << " " << array[i].G_cum*total_G << " " << array[i].G_cum << "\t" << i << " " << array[i].I_cum*total_I << " " << array[i].I_cum << "\n";
-	 FARvsFRR << i << " " << array[i].G_cum << " " << array[i].G_cum*1.0/total_G << "\t" << i << " " << array[i].I_cum << " " << array[i].I_cum*1.0/total_I << "\n";
+	 FARvsFRR << i << " " << total_G-array[i].G_cum << " " << array[i].G_cum*1.0/total_G << "\t" << i << " " << array[i].I_cum << " " << array[i].I_cum*1.0/total_I << "\n";
 	}
 
 	FARvsFRR.close();
@@ -150,7 +150,7 @@ int main(int argc,char * argv[])
     //eer << "  (" << array[min_index].G_cum << ")  " << threshold << " with Difference = " <<array[min_index].diff; 
     eer << array[min_index].G_cum*1.0/total_G << " " << threshold << " " << "0 "; 
 
-	cout << threshold << "\n";
+	cout << "Threshold = " << threshold << "\n";
     ofstream fa,fr;
     fa.open("test.FA");
     fa << "Imposters Passed (FA)\n";
