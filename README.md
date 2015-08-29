@@ -12,6 +12,7 @@ It has following features:
 ##How to Use
 
 Install Gnuplot. Execute main.sh program with "filename" (without quotes) as an argument.
+Sample file is L4_1000.txt
 
 ```shell
 sh main.sh filename
